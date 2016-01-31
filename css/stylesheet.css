@@ -1,0 +1,189 @@
+body {
+  background-color: #252d33;
+  color: #eeeeee;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+}
+a {
+  color: #3282c4;
+}
+a:hover {
+  color: #559bd4;
+}
+.subtle {
+  color: #91959a;
+}
+.subtle.purple {
+  color: #7d1936;
+}
+a.download {
+  display: inline-block;
+  white-space: nowrap;
+}
+a.download .aligner {
+  height: 68px;
+}
+a.download .download_btn {
+  transition: background-color 0.2s;
+  background-color: #d12b5a;
+  border-bottom: 4px solid #770e31;
+  background-repeat: no-repeat;
+  padding: 0 20px;
+}
+a.download .text {
+  transition: background-color 0.2s;
+  color: #FFFFFF;
+  background-color: #3282c4;
+  border-bottom: 4px solid #0e466b;
+  background-repeat: no-repeat;
+  padding: 0 20px;
+}
+a.download:hover .download_btn {
+  background-color: #d73e6a;
+}
+a.download:hover .text {
+  background-color: #559bd4;
+}
+.topper {
+  background-image: url("/img/topper.jpg");
+  background-position: 50% 100%;
+  background-size: auto 150%;
+}
+.topper .top_aligner {
+  height: 73vh;
+  min-height: 200px;
+}
+.topper > div {
+  background: url("/img/colors.png") center / 100% 100% no-repeat, url("/img/dotted_gradient.png") bottom repeat-x;
+}
+.topper .text {
+  max-width: 470px;
+}
+.topper .top_logo {
+  max-width: 90%;
+}
+.topper .games ib {
+  margin: 10% 0;
+}
+.topper .games ib img {
+  max-width: 80%;
+}
+.section {
+  background: url("/img/dotted_gradient.png") bottom repeat-x, url("/img/arrow_down_light.png") top no-repeat;
+  text-align: center;
+  padding: 45px 40px;
+  border-top: 2px solid #303942;
+  border-bottom: 2px solid #303942;
+}
+.section > div {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.section:nth-child(odd) {
+  background: url("/img/dotted_gradient.png") bottom repeat-x, url("/img/arrow_down_dark.png") top no-repeat;
+  background-color: #303942;
+  border-top: 2px solid #252d33;
+  border-bottom: 2px solid #252d33;
+}
+.section:nth-child(2) {
+  background: url("/img/dotted_gradient.png") bottom repeat-x, url("/img/arrow_down_pink.png") top no-repeat;
+}
+.section:last-child {
+  background: none;
+}
+.section.features .very_large {
+  margin: 14px 0;
+}
+.section.features .dot {
+  margin-bottom: 5px;
+}
+.section.features .dot:before {
+  content: "• ";
+  color: #d12b5a;
+}
+.section.how_to .video {
+  margin-left: auto;
+  margin-right: auto;
+  height: 33vw;
+  width: 60vw;
+}
+.section.donate .text {
+  max-width: 300px;
+}
+.section.faq .ul > div {
+  text-align: left;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: 2px solid #303942;
+  position: relative;
+}
+.section.faq .ul > div > div {
+  margin-left: 60px;
+  padding: 5px;
+}
+.section.faq .ul > div > div:nth-child(1) {
+  color: #d12b5a;
+}
+.section.faq .ul > div:last-child {
+  border: none;
+}
+.section.faq .ul > div:before {
+  content: "";
+  background-image: url("/img/sound_wave.png");
+  background-position: 0px 0px;
+  display: block;
+  height: 44px;
+  position: absolute;
+  width: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.section.faq .ul > div:nth-child(2n):before {
+  background-position: -45px 0px;
+}
+.section.faq .ul > div:nth-child(3n):before {
+  background-position: -25px 0px;
+}
+.section.faq .ul > div:nth-child(4n):before {
+  background-position: -10px 0px;
+}
+.section.faq .ul > div:nth-child(5n):before {
+  background-position: -15px 0px;
+}
+.section.download .ul > div {
+  border-bottom: 2px solid #252d33;
+  color: #91959a;
+}
+.section.download .ul > div > ib {
+  padding: 20px 0;
+}
+.section.download .ul > div:first-child {
+  font-size: 125%;
+  border: 2px solid #d12b5a;
+  color: inherit;
+}
+.section.download .ul > div:first-child > ib:first-child {
+  background-color: #d12b5a;
+}
+.section.download .ul > div:first-child > ib:first-child:before {
+  content: "Newest";
+  display: block;
+  font-size: 80%;
+}
+.section.download .ul > div:last-child {
+  border: none;
+}
+@media only screen and (max-width: 799px) {
+  body {
+    font-size: 12px;
+  }
+  .section {
+    padding: 25px 30px;
+  }
+  .section.reddit {
+    overflow: hidden;
+  }
+  .section.reddit .mega {
+    font-size: 140%;
+  }
+}

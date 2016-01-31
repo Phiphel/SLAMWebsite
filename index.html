@@ -1,0 +1,293 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>SLAM - Source Live Audio Mixer - For CS:GO, CS:S and TF2</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="shortcut icon" type="image/x-icon" href="/favico.ico" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
+		<link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+		<link href="/css/minimal.v1.css" rel="stylesheet" type="text/css">
+		<link href="/css/stylesheet.css" rel="stylesheet" type="text/css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	
+		
+		<!-- Meta -->
+		<meta name="description" content="Source Live Audio Mixer - SLAM Lets you share sounds over the built in communication system of source games - CS:GO, CSS and TF2">
+		<meta property="og:title" content="SLAM - Source Live Audio Mixer" />
+		<meta property="og:description" content="SLAM Lets you share sounds over the built in communication system of source games - CS:GO, CSS and TF2." />
+		<meta property="og:image" content="http://slam.flankers.net/img/somed_image.jpg">
+		<link rel="image_src" href="http://slam.flankers.net/img/somed_image.jpg" />
+		<script>
+		
+		
+		// Data part!
+		var versions = [
+			// PLACE NEWEST VERSION AT THE TOP
+			{v:"1.2.2", date:"1-1-2016", cl:"https://github.com/SilentSys/SLAM/releases/tag/v1.2.2", dl:"https://github.com/SilentSys/SLAM/releases/download/v1.2.2/SLAM_v1.2.2.zip"},
+			{v:"1.2.1", date:"9-12-2015", cl:"https://github.com/SilentSys/SLAM/releases/tag/v1.2.1", dl:"https://github.com/SilentSys/SLAM/releases/download/v1.2.1/SLAM_v1.2.1.zip"},
+			{v:"1.2.0", date:"4-10-2015", cl:"https://github.com/SilentSys/SLAM/releases/tag/v1.2.0", dl:"https://github.com/SilentSys/SLAM/releases/download/v1.2.0/SLAM_v1.2.0.zip"},
+			{v:"1.1.2", date:"30-9-2015", cl:"https://github.com/SilentSys/SLAM/releases/tag/v1.1.2", dl:"https://github.com/SilentSys/SLAM/releases/download/v1.1.2/SLAM_v1.1.2.zip"},
+			{v:"1.1.1", date:"27-9-2015", cl:"https://github.com/SilentSys/SLAM/releases/tag/v1.1.1", dl:"https://github.com/SilentSys/SLAM/releases/download/v1.1.1/SLAM_v1.1.1.zip"},
+			{v:"1.1.0", date:"25-9-2015", cl:"https://github.com/SilentSys/SLAM/releases/tag/v1.1.0", dl:"https://github.com/SilentSys/SLAM/releases/download/v1.1.0/SLAM_v1.1.0.zip"},
+			{v:"1.0.0", date:"13-9-2015", cl:"https://github.com/SilentSys/SLAM/releases/tag/v1.0.0", dl:"https://github.com/SilentSys/SLAM/releases/download/v1.0.0/SLAM_v1.0.0.zip"},
+		];
+		// Data part END!
+		
+		
+		// Remove white spaces
+		jQuery.fn.htmlClean = function() {
+			this.contents().filter(function() {
+				if (this.nodeType != 3) {
+					$(this).htmlClean();
+					return false;
+				} else if ($(this).siblings("span, a").length == 0) { // Hackish to fix to not remove spaces after and before spans and a
+					this.textContent = $.trim(this.textContent);
+					return !/\S/.test(this.nodeValue);
+				}
+				return false;
+			}).remove();
+			return this;
+		}
+		
+		// Templates
+		var template = {};
+		template.download_button = function() {
+			return $("<a class='download'>").attr("href", versions[0].dl).append(
+				$("<ib class='middle-all'>").append(
+					$("<ib class='download_btn center'>").append(
+						$("<ib class='aligner'>"),
+						$("<img src='/img/download.png'>")
+					),
+					$("<ib class='text left'>").append(
+						$("<ib class='aligner'>"),
+						$("<ib>").append(
+							$("<div class='mega'>Download</div>"),
+							$("<div>Newest Version </div>").append(versions[0].v)
+						)
+					)
+				)
+			)
+		}
+		
+		template.download_list = function() {
+			var div = $("<div class='ul middle-all'>");
+			for (var i in versions) {
+				var v = versions[i];
+				div.append(
+					$("<div>").append(
+						$("<ib class='w20'>").text(v.date),
+						$("<ib class='w20'>").text(v.v),
+						$("<ib class='w30'>").append(
+							$("<a>Change Log</a>").attr("href", v.cl)
+						),
+						$("<ib class='w30'>").append(
+							$("<a>Download</a>").attr("href", v.dl)
+						)
+					)
+				)
+			}
+			return div;
+		}
+		template.copyright = function() {
+			return "SLAM © 2015 - "+new Date().getFullYear();
+		}
+		
+		template.video = function() {
+			var iframe = $('<iframe width="560" height="315" src="https://www.youtube.com/embed/0cBlDWQAYew?rel=0" frameborder="0" allowfullscreen></iframe>');
+			setTimeout(function() {
+				iframe.attr("height", "100%").attr("width", "100%");
+			}, 2000);
+			return iframe;
+		}
+
+		$(function() {
+			$("body").htmlClean();
+			$("[template=download_button]").append(template.download_button());
+			$("[template=download_list]").append(template.download_list());
+			$("[template=copyright]").append(template.copyright());
+			$("[template=video]").append(template.video());
+			
+			var topper_height = $(".topper").height();
+			// Paralax
+			$(document).scroll(function(){
+				var pct = (-($(this).scrollTop()/topper_height)*100)+100;
+				$(".topper").css("background-position", "50% "+Math.max(0, pct)+"%");
+			});
+			
+		})
+		
+		
+		
+		</script>
+
+	</head>
+	<body>
+		<div class='topper center large'>
+			<div>
+				<div class='middle-kids large-padding-lr bs'>
+					<ib class='top_aligner go-to-hide'>
+					</ib>
+					<ib>
+						<div class='large-padding-t'>
+							<img class='top_logo' src='/img/top_logo.png'/>
+						</div>
+						<div class='games'>
+							<ib class='w33 center'>
+								<img src='/img/game_logo_csgo.png'/>
+							</ib>
+							<ib class='w33 center'>
+								<img src='/img/game_logo_css.png'/>
+							</ib>
+							<ib class='w33 center'>
+								<img src='/img/game_logo_tf2.png'/>
+							</ib>
+						</div>
+						<div class='large-padding-b'>
+							<ib class='text'>
+								<span class='bold'>SLAM</span> lets you share sounds over the built in communication system of source games.
+							</ib>
+						</div>
+						<div template='download_button' class='large-padding-b'></div>
+					</ib>
+				</div>
+			</div>
+		</div>
+		<div class='section features'>
+			<div>
+				<ib class='w33 large-padding-b top go-to-block go-to-100'>
+					<img src='/img/feature_1.png'/>
+					<div class='very_large'>Easy To Setup</div>
+					<div class='dot'>Simple interface</div>
+					<div class='dot'>Import multiple sound clips and songs.</div>
+				</ib>
+				<ib class='w33 large-padding-b top go-to-block go-to-100'>
+					<img src='/img/feature_2.png'/>
+					<div class='very_large'>Easy To Use</div>
+					<div class='dot'>Create binds to load specific sound clips.</div>
+					<div class='dot'>Change volume on the fly.</div>
+				</ib>
+				<ib class='w33 large-padding-b top go-to-block go-to-100'>
+					<img src='/img/feature_3.png'/>
+					<div class='very_large'>Free and Open Source</div>
+					<div class='dot'>We’re on <a href='https://github.com/SilentSys/SLAM'>GitHub</a>.</div>
+				</ib>
+				<div template='download_button' class='large-padding-t'></div>
+			</div>
+		</div>
+		<div class='section how_to'>
+			<div>
+				<div class='mega large-padding-b'>Basic How To</div>
+				<div class='video large-padding-b' template='video'></div>
+				<div class='large-padding-b large'>
+					For more help, see the FAQ below
+				</div>
+				<div template='download_button'></div>
+			</div>
+		</div>
+		<div class='section donate middle-all'>
+			<div>
+				<ib class='padding-tb w40 right go-to-100 go-to-center'>
+					<ib class='text'>
+						<span class='bold'>SLAM</span> is completely free, but if you enjoy it, please consider donating.
+					</ib>
+				</ib>
+				<ib class='padding-tb w20 go-to-100 go-to-center'>
+					<img src='/img/love.png'/>
+				</ib>
+				<ib class='padding-tb w40 left go-to-100 go-to-center'>
+					<form class="donate_btn" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+						<input type="hidden" name="cmd" value="_s-xclick">
+						<input type="hidden" name="hosted_button_id" value="RVLLPGWJUG6CY">
+						<ib class="hide go-to-show">Donate with</ib>
+						<input class="hide go-to-show margin-auto" type="image" src="/img/paypal_small.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+						<input class="go-to-hide" type="image" src="/img/paypal.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					</form>
+				</ib>
+			</div>
+		</div>
+		<div class='section reddit'>
+			<div>
+				<ib class='w50 go-to-100 large-padding-b'>
+					<img src='/img/twitter_logo.png'/>
+					<div class='large padding-t'>Follow us on Twitter for updates</div>
+					<a href="http://twitter.com/SilentFL" class="block mega">SilentFL</a>
+				
+				</ib>
+				<ib class='w50 go-to-100 large-padding-b'>
+					<img src='/img/reddit_logo.png'/>
+					<div class='large padding-t'>Find help or just say hello on Reddit</div>
+					<a href="http://www.reddit.com/r/SourceLiveAudioMixer" class="block mega">/r/SourceLiveAudioMixer</a>
+				</ib>
+			</div>
+		</div>
+		<div class='section faq'>
+			<div>
+				<div class='mega large-padding-b'>FAQ</div>
+				<div class='ul'>
+					<div>
+						<div>I can't start SLAM, I keep getting an error.</div>
+						<div>You probably have an out-of-date version of .Net. <a href='https://www.microsoft.com/en-us/download/details.aspx?id=30653'>Download v4.5</a>.</div>
+					</div>
+					<div>
+						<div>
+							<div>I started SLAM but none of the commands work.</div>
+							<div class='subtle purple'>OR</div>
+							<div>When I type "exec slam", I get "exec: couldn't exec slam".</div>
+						</div>
+						<div>You probably have your game installed on a drive other than C:\. Click "Settings", under "SteamApps Directory" click "Change", and then select your "steamapps" folder that contains your game.</div>
+					</div>
+					<div>
+						<div>After playing a song, I can't use my mic.</div>
+						<div>To play a song you press your play key once, when you are done playing the song (or it's over), you must press your play key one more time.</div>
+					</div>
+					<div>
+						<div>When I type "exec slam", I get "Unknown command: voice_fadeouttime".</div>
+						<div>That error is generally nothing to worry about. Try using SLAM anyway.</div>
+					</div>
+					<div>
+						<div>It's just is not working in CSS or TF2.</div>
+						<div>For CSS and TF2, the servers must have sv_use_steam_voice enabled.</div>
+					</div>
+					<div>
+						<div>Everything works, but my track won't play in CS:S or TF2.</div>
+						<div>To play a track in a CS:S or TF2 server, the server must have "sv_allow_voice_from_file" set to "1" and "sv_use_steam_voice" set to "0".</div>
+					</div>
+				</div>
+				<div template='download_button' class='large-padding-t'></div>
+			</div>
+		</div>
+		<div class='section download'>
+			<div template='download_list'>
+				<div class='mega large-padding-b'>All Downloads</div>
+			</div>
+		</div>
+		<div class='section copyright middle-all'>
+			<div>
+				<ib class='w40 go-to-100 large-padding-b'>
+					<div class='large padding-t'><span class='bold'>SLAM</span> is created by Andy</div>
+					<a href="mailto:andy@flankers.net" class="block">andy@flankers.net</a>
+					<a href="http://steamcommunity.com/profiles/76561197998958343" class="block">Steam</a>
+				</ib>
+				<ib template='copyright' class='w20 subtle go-to-hide'></ib>
+				<ib class='w40 go-to-100 large-padding-b'>
+					<div class='large padding-t'>Website and Logo by Phiphel</div>
+					<a href="mailto:p@blindrage.org" class="block">p@blindrage.org</a>
+					<a href="https://github.com/Phiphel" class="block">Github.com/Phiphel</a>
+				</ib>
+				<ib template='copyright' class='hide center subtle go-to-show'></ib>
+			</div>
+		</div>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-67549211-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
+	</body>
+</html>

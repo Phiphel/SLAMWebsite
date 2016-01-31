@@ -1,0 +1,250 @@
+@baseURL: ~"/p/slam/";
+
+body {
+	background-color:#252d33;
+	color:#eeeeee;
+	font-family: 'Montserrat', sans-serif;
+	font-size:14px;
+}
+a { color:#3282c4; }
+a:hover { color:#559bd4; }
+.subtle {
+	color:#91959a;
+	&.purple {
+		color:#7d1936;
+	}
+}
+
+// Download button
+a.download {
+	display:inline-block;
+	white-space: nowrap;
+	
+	.aligner {
+		height: 68px;
+	}
+		
+	.download_btn {
+		transition:background-color 0.2s;
+		
+		background-color: #d12b5a;
+		border-bottom: 4px solid #770e31;
+		background-repeat:no-repeat;
+		padding:0 20px;
+	}
+	
+	.text {
+		transition:background-color 0.2s;
+		color:#FFFFFF;
+		background-color: #3282c4;
+		border-bottom: 4px solid #0e466b;
+		background-repeat:no-repeat;
+		padding:0 20px;
+	}
+	
+	&:hover {
+		.download_btn {
+			background-color: #d73e6a;
+		}
+		.text {
+			background-color: #559bd4;
+		}
+	}
+}
+
+
+.topper {
+	background-image: url("@{baseURL}img/topper.jpg");
+	background-position: 50% 100%;
+	background-size: auto 150%;
+	
+	.top_aligner {
+		height:73vh;
+		min-height:200px;
+	}
+	
+	&>div {
+		background:
+			url("@{baseURL}img/colors.png") center/100% 100% no-repeat,
+			url("@{baseURL}img/dotted_gradient.png") bottom repeat-x;
+	}
+	
+	.text {
+		max-width: 470px;
+	}
+	
+	.top_logo {
+		max-width:90%;
+	}
+	
+	.games {
+		ib {
+			margin:10% 0;
+			img {
+				max-width:80%;
+			}
+		}
+	}
+}
+
+
+.section {
+	background:
+		url("@{baseURL}img/dotted_gradient.png") bottom repeat-x,
+		url("@{baseURL}img/arrow_down_light.png") top no-repeat;
+	text-align:center;
+	padding: 45px 40px;
+	
+	border-top:2px solid #303942;
+	border-bottom:2px solid #303942;
+	
+	>div {
+		max-width:1280px;
+		margin: 0 auto;
+	}
+	
+	&:nth-child(odd) {
+		background:
+			url("@{baseURL}img/dotted_gradient.png") bottom repeat-x,
+			url("@{baseURL}img/arrow_down_dark.png") top no-repeat;
+		background-color:#303942;
+		border-top:2px solid #252d33;
+		border-bottom:2px solid #252d33;
+	}
+	&:nth-child(2) {
+		background:
+			url("@{baseURL}img/dotted_gradient.png") bottom repeat-x,
+			url("@{baseURL}img/arrow_down_pink.png") top no-repeat;
+	}
+	&:last-child {
+		background:none;
+	}
+
+		
+
+	&.features {
+		// Override
+		.very_large {
+			margin:14px 0;
+		}
+		.dot {
+			margin-bottom:5px;
+			
+			&:before {
+				content:"• ";
+				color:#d12b5a;
+			}
+		}
+	}
+
+	&.how_to {
+		.video {
+			margin-left:auto;
+			margin-right:auto;
+			height:33vw;
+			width:60vw;
+		}
+	}
+
+	&.donate {
+		.text {
+			max-width: 300px;
+		}
+	}
+	
+	
+	&.faq {
+		.ul {
+			&>div {
+				text-align:left;
+				padding-top:30px;
+				padding-bottom:30px;
+				border-bottom:2px solid #303942;
+				position:relative;
+				&>div {
+					margin-left:60px;
+					padding:5px;
+				}
+				&>div:nth-child(1) {
+					color:#d12b5a;
+				}
+				&:last-child {
+					border:none;
+				}
+				&:before {
+					content:"";
+					background-image: url("@{baseURL}img/sound_wave.png");
+					background-position: 0px 0px;
+					display: block;
+					height: 44px;
+					position: absolute;
+					width: 28px;
+					top: 50%;
+					transform: translateY(-50%);
+				}
+				&:nth-child(2n):before {
+					background-position: -45px  0px;
+				}
+				&:nth-child(3n):before {
+					background-position: -25px 0px;
+				}
+				&:nth-child(4n):before {
+					background-position: -10px  0px;
+				}
+				&:nth-child(5n):before {
+					background-position: -15px 0px;
+				}
+			}
+		}
+		
+	}
+	
+	&.download {
+		.ul {
+			&>div {
+				border-bottom:2px solid #252d33;
+				color:#91959a;
+				
+				&>ib {
+					padding:20px 0;
+				}
+				
+				&:first-child {
+					font-size:125%;
+					border:2px solid #d12b5a;
+					color:inherit;
+					&>ib:first-child {
+						background-color:#d12b5a;
+						&:before {
+							content: "Newest";
+							display: block;
+							font-size: 80%;
+						}
+					}
+				}
+				&:last-child {
+					border:none;
+				}
+				
+			}
+		}
+	}
+	
+}
+
+
+@media only screen and (max-width: 799px) {
+	body {
+		font-size:12px;
+	}
+	
+	.section {
+		padding: 25px 30px;
+		&.reddit {
+			overflow:hidden;
+			.mega {
+				font-size:140%; 
+			}
+		}
+	}
+}
